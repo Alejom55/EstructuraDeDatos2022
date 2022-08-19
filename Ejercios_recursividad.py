@@ -31,7 +31,6 @@ print("Cantidad de pares:", f(l))
 
 """ 3) Defina una función recursiva que reciba un string de números separados por coma, por ejemplo "1,2,3, 4,5" 
 y devuelva la productoria de estos números. Tenga en cuenta el caso en que hay y no hay espacios entre los números y las comas."""
-
 numeros = "1,2,3, 4,5"
 
 def f(string):
@@ -48,6 +47,8 @@ def f(string):
             return f(string[:-1])
 print(f(numeros))
 
+
+
 """ 4) Escriba una función recursiva que reciba un número y retorne la cantidad de dígitos de este número."""
 def f(num):
     if(num//10==0):
@@ -56,3 +57,15 @@ def f(num):
         return 1 + f(num//10)
 
 print(f(5451))
+
+
+
+""" 5) Escriba una función recursiva que encuentre el mínimo común múltiplo de dos números n y m."""
+
+def f(n,m,mcm = 1):
+    if (mcm % n == 0 and mcm % m ==0):
+        return mcm
+    else:
+        mcm += 1
+        return f(n,m,mcm)
+print(f(3,4))
