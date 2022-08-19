@@ -46,6 +46,13 @@ def f(string):
             return ult * f(string[:-1])
         else:
             return f(string[:-1])
-
-
 print(f(numeros))
+
+""" 4) Escriba una función recursiva que reciba un número y retorne la cantidad de dígitos de este número."""
+def f(num):
+    if(num//10==0):
+        return 1
+    else:
+        return 1 + f(num//10)
+
+print(f(5451))
