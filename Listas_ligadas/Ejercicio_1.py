@@ -35,7 +35,19 @@ class LinkedList:
   def insert_at(self, index, value):
     if (index == 0):
         self.add_at_head(value)
-    else: 
+    else:
+        if (self.size <= index):
+            return "Indice fuera de rango"
+        else:
+            
+        new_node = Node(value)
+        if(self.head is None):
+            self.head = new_node
+        else:
+            old_head = self.head
+            self.head = new_node
+            new_node.next = old_head
+    
         
 
 ll = LinkedList(0)
