@@ -22,20 +22,22 @@ class Queue:
         
         if(self.num_elementos() == self.tamanno):
             return print("No hay posiciones disponibles")
-        
-        if self.num_elementos() == 0:
+        if self.num_elementos() == 0 and self.f is None:
             self.f = 0 
-            
         pos_disp = (self.f + self.num_elementos()) % self.tamanno
         self.queue[pos_disp] = elemento
+        print(self.queue)
       
     def dequeue(self):
         #remueve y retorna el primer elemento
         if(self.is_empty()):
             raise Exception("Cola vacía...")
-        else:
-            self.frente = (self.frente + 1) % self.tamanno
-            self.queue[self.f]
+        value = self.queue[self.f]
+        self.queue[self.f] = None
+        self.f = (self.f + 1) % self.tamanno
+        print(self.queue)
+        return value
+    
   
     def first(self):
         #retornar el primer elemento de la cola
@@ -51,12 +53,14 @@ class Queue:
         return len(self.queue)
   
 cola = Queue()
-print("Numero elementos: ", cola.num_elementos())
 cola.enqueue(1)
+cola.dequeue()
 cola.enqueue(2)
 cola.enqueue(3)
 cola.enqueue(4)
 cola.enqueue(5)
-
-for n in cola.queue:
-    print(n)
+print(cola.num_elementos())
+cola.dequeue()
+cola.dequeue()
+cola.enqueue(7)
+print(cola.num_elementos())
