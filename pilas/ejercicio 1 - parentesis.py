@@ -26,13 +26,15 @@ class Stack:
     #retorna tamaño
         return len(self.stack)
 
-    def f(self, cadenita):
+    def check(self, cadenita):
         for i in cadenita:
-            print(self.stack)
-            self.push(i)
-            if(i==")"):
-                self.pop()
-                self.pop()
+            if(i=="("):
+                self.push(i)
+            else:
+                try:
+                    self.pop()
+                except: 
+                    return False
             
         if(len(self.stack) == 0):
             return True
