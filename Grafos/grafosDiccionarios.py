@@ -25,6 +25,18 @@ class Graph:
     
     def print_graph(self):
         print(self.graph)
+    
+    def DFS(self, u, visitados =[]):
+        if self.graph[u] == []:
+            if u not in visitados:
+                visitados.append(u)
+            return visitados
+        else:
+            for a in self.graph[u]:
+                if a not in visitados:
+                    visitados.append(a)
+                    self.DFS(a)
+            return visitados
 
 
 g = Graph()
