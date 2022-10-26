@@ -2,6 +2,7 @@ class BinaryTree:
     def __init__(self, root = None):
         self.root = root
 
+    #Funciona
     def existe(self, e, root):
         current_root = root
         if (e == current_root):
@@ -14,6 +15,7 @@ class BinaryTree:
             else:
                 return self.existe(e, current_root.left) or self.existe(e, current_root.right)
 
+    #No funciona
     def insertarEspecifico(self, value, padre = None):
         new_node = Node(value)
         if self.existe(padre, self.root) is False:
@@ -21,10 +23,13 @@ class BinaryTree:
         else:
             pass
 
+
+
 class BST():
     def __init__(self, root = None):
         self.root = Node(root)
 
+    #Funciona
     def agregar(self,val, raiz = None):
         current_root = raiz
         if raiz is None:
@@ -41,15 +46,15 @@ class BST():
                     current_root.right = Node(val)
                 else:
                     return self.agregar(val,current_root.right)
-    
+
+
+    #Funciona
     def buscar(self, val, raiz):
         current_root = raiz
         if val == current_root.value:
             return True
         else:
-            if (current_root.left == None):
-                return False
-            elif(current_root.right == None):
+            if (current_root.left is None and current_root.right is None):
                 return False
 
             if val < current_root.value:
@@ -57,8 +62,35 @@ class BST():
             else:
                 return self.buscar(val, current_root.right)
 
-    
+    #Funciona
+    def invertir(self,raiz):
+        current_root = raiz
 
+        if current_root is not None:
+            current_right = current_root.right
+            current_left = current_root.left
+            raiz.left = current_right
+            raiz.right = current_left
+            return self.invertir(current_left), self.invertir(current_right)
+
+    #Funciona
+    def altura(self, raiz, cont = -1):
+        current_root = raiz
+        current_cont = cont
+
+        if current_root is not None:
+            current_cont += 1
+            if self.altura(current_root.left, current_cont) >= self.altura(current_root.right, current_cont):
+                current_cont = self.altura(current_root.left, current_cont)
+            else:
+                current_cont = self.altura(current_root.right, current_cont)
+        return current_cont
+
+    def valance(self, raiz):
+        pass
+
+    
+    #Funciona
     def pretty_print_tree(self, node, prefix="", is_left=True):
         if not node:
           print("Empty Tree")
@@ -90,6 +122,7 @@ arbolBST.agregar(2, arbolBST.root)
 arbolBST.agregar(20, arbolBST.root)
 arbolBST.agregar(40, arbolBST.root)
 arbolBST.agregar(3, arbolBST.root)
+arbolBST.agregar(4, arbolBST.root)
 arbolBST.agregar(1, arbolBST.root)
 arbolBST.agregar(22, arbolBST.root)
 arbolBST.agregar(23, arbolBST.root)
@@ -97,21 +130,6 @@ arbolBST.agregar(41, arbolBST.root)
 arbolBST.agregar(20, arbolBST.root)
 
 
-
-
+print(arbolBST.altura(arbolBST.root))
 arbolBST.pretty_print_tree(arbolBST.root)
 
-print(arbolBST.buscar(23, arbolBST.root))
-
-#
-##Raiz nodo1
-#arbol.root = nodo1
-#
-#nodo1.left = nodo2
-#nodo1.right = nodo3
-#nodo2.left = nodo4
-##nodo2.right = nodo5
-#
-#print(arbol.existe(nodo5,nodo1))
-#print(arbol.insertarEspecifico(nodo3,nodo5))
-#
