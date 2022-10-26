@@ -86,8 +86,19 @@ class BST():
                 current_cont = self.altura(current_root.right, current_cont)
         return current_cont
 
-    def valance(self, raiz):
-        pass
+
+    #No se si funciona
+    def valance(self, raiz, cont = -1):
+        current_root = raiz
+        current_cont = cont
+        
+        izq = self.altura(current_root.left, current_cont)
+        der = self.altura(current_root.right, current_cont)
+        valanced = izq - der
+        if valanced <= 0:
+            return "Esta valanceado"
+        else:
+            return "No esta valanceado"
 
     
     #Funciona
@@ -128,6 +139,10 @@ arbolBST.agregar(22, arbolBST.root)
 arbolBST.agregar(23, arbolBST.root)
 arbolBST.agregar(41, arbolBST.root)
 arbolBST.agregar(20, arbolBST.root)
+
+
+print(arbolBST.valance(arbolBST.root.left))
+
 
 
 print(arbolBST.altura(arbolBST.root))
