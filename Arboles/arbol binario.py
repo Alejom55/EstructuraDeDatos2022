@@ -46,6 +46,13 @@ class BST():
                     current_root.right = Node(val)
                 else:
                     return self.agregar(val,current_root.right)
+    
+    #Funciona
+    def meterLista(self, lista, root):
+        num = len(lista)
+        for n in range(num):
+            self.agregar(lista[n], root)
+
 
 
     #Funciona
@@ -56,7 +63,6 @@ class BST():
         else:
             if (current_root.left is None and current_root.right is None):
                 return False
-
             if val < current_root.value:
                 return self.buscar(val, current_root.left)
             else:
@@ -74,7 +80,7 @@ class BST():
             return self.invertir(current_left), self.invertir(current_right)
 
     #Funciona
-    def altura(self, raiz, cont = -1):
+    def altura(self, raiz, cont = 0):
         current_root = raiz
         current_cont = cont
 
@@ -87,22 +93,59 @@ class BST():
         return current_cont
 
 
-    #No se si funciona
-    def valance(self, raiz, cont = -1):
-        current_root = raiz
-        current_cont = cont
-        
-        izq = self.altura(current_root.left, current_cont)
-        der = self.altura(current_root.right, current_cont)
-        valanced = izq - der
-        if valanced <= 0:
-            return "Esta valanceado"
-        else:
-            return "No esta valanceado"
-
-    
     #Funciona
-    def pretty_print_tree(self, node, prefix="", is_left=True):
+    def valance(self, raiz):
+        current_root = raiz
+        
+        izq = self.altura(current_root.left)
+        der = self.altura(current_root.right)
+        valanced = izq - der
+        if valanced == -1 or valanced == 0 or valanced == 1:
+            return True
+        else:
+            return False
+
+
+    #Funciona
+    def listaValance(self, raiz, lstNoValanced = list(), lstValanced = list()):
+        current_root = raiz
+        
+        if current_root is not None:
+            current_left = raiz.left
+            current_right = raiz.right
+            izq = self.altura(current_left)
+            der = self.altura(current_right)
+            valanced = izq - der
+            if valanced < -1 or valanced > 1:
+                lstNoValanced.append(current_root.value)
+            else:
+                lstValanced.append(current_root.value)
+            self.listaValance(current_left)
+            self.listaValance(current_right)
+        return lstNoValanced, lstValanced
+    
+    def eliminar(self, val, raiz):
+        current_root = raiz
+
+        if current_root is not None:
+            current_left = raiz.left
+            current_right = raiz.right
+            if current_left is not None and current_right is not None:
+                
+                if current_left.value == val:
+                    print(current_root.value)
+                    if current_root.left.left is None and current_root.left.right is None:
+                        raiz.left = None
+                if current_right.value == val:
+                    if current_root.right.left is None and current_root.right.right is None:
+                        raiz.right = None
+            self.eliminar(val,current_left)
+            self.eliminar(val,current_right)
+
+
+
+    #Funciona
+    def pretty_print_tree(self, node, prefix="", is_left = True):
         if not node:
           print("Empty Tree")
           return
@@ -127,24 +170,11 @@ nodo4 = Node(4)
 nodo5 = Node(5)
 
 
-arbolBST = BST(5)
-
-arbolBST.agregar(2, arbolBST.root)
-arbolBST.agregar(20, arbolBST.root)
-arbolBST.agregar(40, arbolBST.root)
-arbolBST.agregar(3, arbolBST.root)
-arbolBST.agregar(4, arbolBST.root)
-arbolBST.agregar(1, arbolBST.root)
-arbolBST.agregar(22, arbolBST.root)
-arbolBST.agregar(23, arbolBST.root)
-arbolBST.agregar(41, arbolBST.root)
-arbolBST.agregar(20, arbolBST.root)
+arbolBST = BST(10)
+lista = [2,20,40,3,5,4,6,1,22,23,41,20]
 
 
-print(arbolBST.valance(arbolBST.root.left))
-
-
-
-print(arbolBST.altura(arbolBST.root))
+arbolBST.meterLista(lista, arbolBST.root)
+arbolBST.eliminar(41, arbolBST.root)
 arbolBST.pretty_print_tree(arbolBST.root)
 
