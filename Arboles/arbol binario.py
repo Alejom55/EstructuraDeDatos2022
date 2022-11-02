@@ -23,6 +23,12 @@ class BinaryTree:
         else:
             pass
 
+    def inOrder(self,raiz):
+        #izq,root,der
+        if(raiz):
+            self.inOrder(raiz.left)
+            print(raiz.value)
+            self.inOrder(raiz.right)
 
 
 class BST():
@@ -142,6 +148,29 @@ class BST():
             self.eliminar(val,current_left)
             self.eliminar(val,current_right)
 
+    def inOrder(self,raiz):
+        #izq,root,der
+        if(raiz):
+            self.inOrder(raiz.left)
+            print(raiz.value)
+            self.inOrder(raiz.right)
+
+    def preOrder(self,raiz):
+        #root,izq,der
+        if(raiz):
+            print(raiz.value)
+            self.inOrder(raiz.left)
+            self.inOrder(raiz.right)
+
+    def posORder(self,raiz):
+        #izq,der,root
+        if(raiz):
+            self.inOrder(raiz.left)
+            self.inOrder(raiz.right)
+            print(raiz.value)
+
+
+
 
 
     #Funciona
@@ -172,9 +201,9 @@ nodo5 = Node(5)
 
 arbolBST = BST(10)
 lista = [2,20,40,3,5,4,6,1,22,23,41,20]
-
-
 arbolBST.meterLista(lista, arbolBST.root)
+arbolBST.inOrder(arbolBST.root)
+
 arbolBST.eliminar(41, arbolBST.root)
 arbolBST.pretty_print_tree(arbolBST.root)
 
