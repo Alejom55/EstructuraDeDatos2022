@@ -130,23 +130,44 @@ class BST():
             self.listaValance(current_right)
         return lstNoValanced, lstValanced
     
+
+    def hoja(self, raiz):
+        if raiz.left == None and raiz.right == None:
+            return True
+
+
     def eliminar(self, val, raiz):
         current_root = raiz
-
+        print(current_root.value)
         if current_root is not None:
             current_left = raiz.left
             current_right = raiz.right
+            print("left",current_left.value)
+            if self.hoja(current_left) == True:
+                raiz.left = None
+            elif self.hoja(current_right) == True:
+                raiz.right = None
             if current_left is not None and current_right is not None:
-                
+                #print(current_left.value)
                 if current_left.value == val:
-                    print(current_root.value)
-                    if current_root.left.left is None and current_root.left.right is None:
-                        raiz.left = None
-                if current_right.value == val:
-                    if current_root.right.left is None and current_root.right.right is None:
-                        raiz.right = None
-            self.eliminar(val,current_left)
-            self.eliminar(val,current_right)
+                    print("Hola")
+
+                    if current_left.left is None:
+                        raiz.left = current_left.right
+                    elif current_left.right is None:
+                        raiz.left = current_left.left
+                    
+                elif current_right.value == val:
+                    print("Hola2")
+
+                    if current_right.left is None:
+                        raiz.right = current_right.right
+                    elif current_right.right is None:
+                        raiz.right = current_right.left
+                else:
+                    self.eliminar(val,current_left)
+                    self.eliminar(val,current_right)   
+            
 
     def inOrder(self,raiz):
         #izq,root,der
@@ -200,10 +221,17 @@ nodo5 = Node(5)
 
 
 arbolBST = BST(10)
-lista = [2,20,40,3,5,4,6,1,22,23,41,20]
+lista = [2,1,20,15]#,3,5,1,4,6,22,23,41,20]
 arbolBST.meterLista(lista, arbolBST.root)
-arbolBST.inOrder(arbolBST.root)
 
-arbolBST.eliminar(41, arbolBST.root)
+
+#arbolBST.eliminar(1, arbolBST.root)
+#arbolBST.eliminar(2, arbolBST.root)
+#arbolBST.eliminar(3, arbolBST.root)
+arbolBST.eliminar(2, arbolBST.root)
+arbolBST.eliminar(1, arbolBST.root)
+
+
+
 arbolBST.pretty_print_tree(arbolBST.root)
 
