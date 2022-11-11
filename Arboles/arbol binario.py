@@ -31,6 +31,10 @@ class BinaryTree:
             self.inOrder(raiz.right)
 
 
+    
+        
+
+
 class BST():
     def __init__(self, root = None):
         self.root = Node(root)
@@ -86,7 +90,7 @@ class BST():
             return self.invertir(current_left), self.invertir(current_right)
 
     #Funciona
-    def altura(self, raiz, cont = 0):
+    def altura(self, raiz, cont = -1):
         current_root = raiz
         current_cont = cont
 
@@ -96,6 +100,7 @@ class BST():
                 current_cont = self.altura(current_root.left, current_cont)
             else:
                 current_cont = self.altura(current_root.right, current_cont)
+            
         return current_cont
 
 
@@ -132,34 +137,29 @@ class BST():
     
 
     def hoja(self, raiz):
-        if raiz.left == None and raiz.right == None:
-            return True
+        if raiz is not None:
+            if raiz.left == None and raiz.right == None:
+                return True
 
 
     def eliminar(self, val, raiz):
         current_root = raiz
-        print(current_root.value)
         if current_root is not None:
             current_left = raiz.left
             current_right = raiz.right
-            print("left",current_left.value)
-            if self.hoja(current_left) == True:
+            if self.hoja(current_left) == True and current_left.value == val:
                 raiz.left = None
-            elif self.hoja(current_right) == True:
+            elif self.hoja(current_right) == True and current_right.value == val:
                 raiz.right = None
-            if current_left is not None and current_right is not None:
-                #print(current_left.value)
+            if current_root is not None and current_left is not None and current_right is not None:
+                
                 if current_left.value == val:
-                    print("Hola")
-
                     if current_left.left is None:
                         raiz.left = current_left.right
                     elif current_left.right is None:
                         raiz.left = current_left.left
-                    
-                elif current_right.value == val:
-                    print("Hola2")
 
+                elif current_right.value == val:
                     if current_right.left is None:
                         raiz.right = current_right.right
                     elif current_right.right is None:
@@ -191,7 +191,19 @@ class BST():
             print(raiz.value)
 
 
-
+    def nodos_nivel(self, raiz):
+        cola = []
+        if (raiz):
+            p = True
+            while p == True:
+                cola.append(raiz.value)
+                p = False
+                #if current_root.left is not None:
+                #    
+                #if current_root.right is not None:
+                #    cola.append(current_root.right.value)
+            return cola
+        
 
 
     #Funciona
@@ -221,17 +233,16 @@ nodo5 = Node(5)
 
 
 arbolBST = BST(10)
-lista = [2,1,20,15]#,3,5,1,4,6,22,23,41,20]
+lista = [2,3,1,0,20,15]#,3,5,1,4,6,22,23,41,20]
 arbolBST.meterLista(lista, arbolBST.root)
 
 
 #arbolBST.eliminar(1, arbolBST.root)
 #arbolBST.eliminar(2, arbolBST.root)
 #arbolBST.eliminar(3, arbolBST.root)
-arbolBST.eliminar(2, arbolBST.root)
-arbolBST.eliminar(1, arbolBST.root)
-
-
+#arbolBST.eliminar(2, arbolBST.root)
+#arbolBST.eliminar(1, arbolBST.root)
+print(arbolBST.nodos_nivel(arbolBST.root))
 
 arbolBST.pretty_print_tree(arbolBST.root)
 
