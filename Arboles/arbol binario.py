@@ -191,19 +191,17 @@ class BST():
             print(raiz.value)
 
 
-    def nodos_nivel(self, raiz):
-        cola = []
-        if (raiz):
-            p = True
-            while p == True:
-                cola.append(raiz.value)
-                p = False
-                #if current_root.left is not None:
-                #    
-                #if current_root.right is not None:
-                #    cola.append(current_root.right.value)
-            return cola
-        
+    def print_level_order(self,root):
+        q = [root]
+        while(q):
+            nodo_aux = q.pop(0)
+            print(nodo_aux.value)
+            if(nodo_aux):
+                if(nodo_aux.left):
+                    q.append(nodo_aux.left)
+                if(nodo_aux.right):
+                    q.append(nodo_aux.right)
+    
 
 
     #Funciona
@@ -242,7 +240,7 @@ arbolBST.meterLista(lista, arbolBST.root)
 #arbolBST.eliminar(3, arbolBST.root)
 #arbolBST.eliminar(2, arbolBST.root)
 #arbolBST.eliminar(1, arbolBST.root)
-print(arbolBST.nodos_nivel(arbolBST.root))
+arbolBST.print_level_order(arbolBST.root)
 
 arbolBST.pretty_print_tree(arbolBST.root)
 
